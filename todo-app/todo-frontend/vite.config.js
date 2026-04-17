@@ -10,7 +10,9 @@ export default defineConfig({
     environment: "jsdom",
     setupFiles: "./setupTests.js",
   },
-
+  server: {
+    allowedHosts: ["app", "localhost"],
+  },
   resolve: {
     alias: {
       "@": "/src",
