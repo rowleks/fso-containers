@@ -8,7 +8,7 @@ COPY package*.json ./
 RUN npm ci
 
 COPY . .
-ARG VITE_BACKEND_URL="http://localhost:3000"
+ARG VITE_BACKEND_URL="/api"
 ENV VITE_BACKEND_URL=$VITE_BACKEND_URL
 RUN ["npm", "run", "test"]
 RUN ["npm", "run", "build"]
