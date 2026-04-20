@@ -1,15 +1,23 @@
 services:
+  nginx:
+    image: nginx:1.29
+    volumes:
+      - ./nginx/nginx.dev.conf:/etc/nginx/nginx.conf:ro
+    ports:
+      - 8080:80
+    container_name: reverse-proxy
+    depends_on:
+      - app
+
   app:
     container_name: hello-front-dev
     image: hello-front-dev
     build:
-      context: .
+      context: ./todo-frontend
       dockerfile: dev.Dockerfile
     volumes:
-      - .:/usr/src/app
+      - ./todo-frontend:/usr/src/app # Bind mount for source code
       - app_node_modules:/usr/src/app/node_modules # Prevent host node_modules from overwriting container's
-    ports:
-      - 5173:5173
 
   debug-helper:
     image: busybox
